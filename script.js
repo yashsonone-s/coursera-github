@@ -1,28 +1,25 @@
-function addRecommendation() {
-    // Get the message of the new recommendation
-    let recommendation = document.getElementById("new_recommendation");
-    // If the user has left a recommendation, display a pop-up
-    if (recommendation.value != null && recommendation.value.trim() != "") {
-      console.log("New recommendation added");
-      //Call showPopup here
-      
-      // Create a new 'recommendation' element and set it's value to the user's message
-      var element = document.createElement("div");
-      element.setAttribute("class","recommendation");
-      element.innerHTML = "\<span\>&#8220;\</span\>" + recommendation.value + "\<span\>&#8221;\</span\>";
-      // Add this element to the end of the list of recommendations
-      document.getElementById("all_recommendations").appendChild(element); 
-      
-      // Reset the value of the textarea
-      recommendation.value = "";
+function updaterate(){
+    var rateval=document.getElementById("rate").value;
+    document.getElementById("rate_val").innerText=rateval;
+}
+
+function compute(){
+    var principal=document.getElementById("principal").value;
+    var rate=document.getElementById("rate").value;
+    var years=document.getElementById("years").value;
+    var interest=principal * years * rate / 100;
+
+    var year=new Date().getFullYear() + parseInt(years);
+    var Amount=parseInt(principal) + parseFloat(interest);
+    var result=document.getElementById("result");
+
+    if(principal<=0){
+        alert("Please enter a positive number !");
+        document.getElementById("principal").focus();
     }
-  }
-  
-  function showPopup(bool) {
-    if (bool) {
-      document.getElementById('popup').style.visibility = 'visible'
-    } else {
-      document.getElementById('popup').style.visibility = 'hidden'
+    else
+    {
+        result.innerHTML = "If you deposit $" + "<mark>" + principal + "</mark>" + ",\<br\> at an interest rate of " + "<mark>" + rate + "%" + "</mark>" + "\<br\> You will receive an amount of $" + "<mark>" + Amount + "</mark>" + ",\<br\> in the year " + "<mark>" + year + "</mark>" + "\<br\>";
     }
-  }
-  
+
+}
